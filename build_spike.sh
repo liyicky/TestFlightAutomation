@@ -4,15 +4,16 @@
 set -e
 
 HOME="/Users/liyicky"
+PROJECT_PATH="${HOME}/Catode/AppOrchard/laughing-shame"
 PROJECT_NAME="LaughingShame"
 RELEASE_BUILD_PATH="${HOME}/Library/Developer/Xcode/DerivedData/LaughingShame-frowannnqdcmquagdfadutbqzjxp/Build/Products/Release-iphoneos"
-IPA_PATH="/tmp/${PROJECT_NAME}.ipa"
-DSYM_ZIP="/tmp/${PROJECT_NAME}.dSYM.zip"
+IPA_PATH="${PROJECT_PATH}/${PROJECT_NAME}.ipa"
+DSYM_ZIP="${PROJECT_PATH}/${PROJECT_NAME}.app.dSYM.zip"
 DEVELOPER="iPhone Developer: Jason Cheladyn (L5VBPXXUXF)"
 PROVISIONING_PROFILE="${HOME}/Library/MobileDevice/Provisioning Profiles/5C43D101-905E-45D4-9AD4-1ACFE82D2F8E.mobileprovision"
 API_TOKEN="42b1d039a90f6d66e6607df3c2e021ea_MTA0NTEyNDIwMTMtMDUtMTMgMTY6MDY6MjEuNTQ3NjA5"
 TEAM_TOKEN="f4a1b4074b9af86fde51f9ecc16b119c_MzEwMjEyMjAxMy0xMi0wNiAxNDo1MToyNC45MjAxNTk"
-DATE=$(date +%"Y-%m-%d")
+DATE=$(/bin/date +%"Y-%m-%d")
 APP="${HOME}/Library/Developer/Xcode/Archives/${DATE}/${ARCHIVE}/Products/Applications/${PROJECT_NAME}.app"
 
 
@@ -21,12 +22,12 @@ APP="${HOME}/Library/Developer/Xcode/Archives/${DATE}/${ARCHIVE}/Products/Applic
 /bin/rm -f $IPA_PATH
 /bin/rm -f $DSYM_ZIP
 
-vim /tmp/testflightnotes.txt
-NOTES=$(cat /tmp/testflightnotes.txt)
+/usr/bin/vim /tmp/testflightnotes.txt
+NOTES=$(/bin/cat /tmp/testflightnotes.txt)
 
 
 #echo "Building...#
-cd $HOME/Catode/AppOrchard/laughing-shame
+/usr/bin/cd $PROJECT_PATH
 #git checkout deployment
 #git pull origin deployment
 #
@@ -36,14 +37,6 @@ cd $HOME/Catode/AppOrchard/laughing-shame
 #git checkout deployment
 #git merge master
 
-# Check for failure
-#/usr/bin/xcodebuild -configuration release -sdk iphoneos -workspace "${PROJECT_NAME}.xcworkspace/" -scheme ${PROJECT_NAME} archive
-/usr/bin/xcrun -sdk iphoneos PackageApplication -v "${RELEASE_BUILD_PATH}/${PROJECT_NAME}.app" -o "$IPA_PATH" --sign "${DEVELOPER}" --embed "${PROVISIONING_PROFILE}"
-
-
-ARCHIVE=$(/bin/ls -t "${HOME}/Library/Developer/Xcode/Archives/${DATE}" | /usr/bin/grep xcarchive | sed -n 1p)
-DSYM="${HOME}/Library/Developer/Xcode/Archives/${DATE}/${ARCHIVE}/dSYMs/${PROJECT_NAME}.app.dSYM"
-/usr/bin/zip -r "${DSYM_ZIP}" "${DSYM}"
 
 ## Get the current version
 #version=$(agvtool what-version)
@@ -71,7 +64,9 @@ DSYM="${HOME}/Library/Developer/Xcode/Archives/${DATE}/${ARCHIVE}/dSYMs/${PROJEC
 # 
 #NEW_VERSION="$v1.$v2.$v3"
 #agvtool new-version -all $NEW_VERSION
-# 
+
+/opt/boxen/rbenv/shims/ipa build 
+
 ## Commit new version and push
 #git add .
 #git commit -m "Build $NEW_VERSION"
