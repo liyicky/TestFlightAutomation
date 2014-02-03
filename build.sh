@@ -4,15 +4,15 @@
 set -e
 
 HOME="/Users/liyicky"
-PROJECT_PATH="${HOME}/Catode/AppOrchard/laughing-shame"
-PROJECT_NAME="LaughingShame"
-RELEASE_BUILD_PATH="${HOME}/Library/Developer/Xcode/DerivedData/LaughingShame-frowannnqdcmquagdfadutbqzjxp/Build/Products/Release-iphoneos"
+PROJECT_PATH="${HOME}/Catode/AppOrchard/Chatwala-iOS"
+PROJECT_NAME="Sender"
+RELEASE_BUILD_PATH="${HOME}/Library/Developer/Xcode/DerivedData/Sender-amjtlrwefvrwyfetopciwykknamn/Build/Products/Debug-iphoneos"
 IPA_PATH="${PROJECT_PATH}/${PROJECT_NAME}.ipa"
 DSYM_ZIP="${PROJECT_PATH}/${PROJECT_NAME}.app.dSYM.zip"
-DEVELOPER="iPhone Developer: Jason Cheladyn (L5VBPXXUXF)"
-PROVISIONING_PROFILE="${HOME}/Library/MobileDevice/Provisioning Profiles/5C43D101-905E-45D4-9AD4-1ACFE82D2F8E.mobileprovision"
+DEVELOPER="iPhone Developer: Jason Cheladyn (X76FE6C3VU)"
+PROVISIONING_PROFILE="${HOME}/Library/MobileDevice/Provisioning Profiles/A401D5F0-7327-4A3D-BCCF-D336E0EB4C0F.mobileprovision"
 API_TOKEN="42b1d039a90f6d66e6607df3c2e021ea_MTA0NTEyNDIwMTMtMDUtMTMgMTY6MDY6MjEuNTQ3NjA5"
-TEAM_TOKEN="f4a1b4074b9af86fde51f9ecc16b119c_MzEwMjEyMjAxMy0xMi0wNiAxNDo1MToyNC45MjAxNTk"
+TEAM_TOKEN="39b66a1f73c7144a3ded703c30a9a01e_Mjk1OTAxMjAxMy0xMS0wNyAxNzo0MjowNy4wOTMyMjI"
 DATE=$(/bin/date +%"Y-%m-%d")
 APP="${HOME}/Library/Developer/Xcode/Archives/${DATE}/${ARCHIVE}/Products/Applications/${PROJECT_NAME}.app"
 
@@ -28,10 +28,11 @@ NOTES=$(/bin/cat /tmp/testflightnotes.txt)
 
 #echo "Building...#
 /usr/bin/cd $PROJECT_PATH
+git checkout develop
+git pull origin develop
+
 git checkout deployment
-git checkout master
-git checkout deployment
-git merge master
+git merge develop
 
 
 # Get the current version
@@ -60,8 +61,7 @@ fi
  
 NEW_VERSION="$v1.$v2.$v3"
 agvtool new-version -all $NEW_VERSION
-
-/opt/boxen/rbenv/shims/ipa build 
+/opt/boxen/rbenv/shims/ipa build
 
 # Commit new version and push
 git add .
@@ -78,4 +78,4 @@ git push origin deployment
 
 git wood --summary HEAD^..HEAD
 /usr/bin/open "https://testflightapp.com/dashboard/builds/"
-terminal-notifier -title "${PROJECT_NAME}" -subtitle "New Build ${NEW_VERSION}" -message "${NOTES}" 
+/opt/boxen/rbenv/shims/terminal-notifier -title "${PROJECT_NAME}" -subtitle "New Build ${NEW_VERSION}" -message "${NOTES}" 
