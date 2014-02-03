@@ -3,16 +3,16 @@
 # set -e exits the terminal once a command returns a non 0 exit code. Use this to not push any broken code.
 set -e
 
-HOME="/Users/liyicky"
-PROJECT_PATH="${HOME}/Catode/AppOrchard/Chatwala-iOS"
-PROJECT_NAME="Sender"
-RELEASE_BUILD_PATH="${HOME}/Library/Developer/Xcode/DerivedData/Sender-amjtlrwefvrwyfetopciwykknamn/Build/Products/Debug-iphoneos"
+HOME=""
+PROJECT_PATH=""
+PROJECT_NAME=""
+RELEASE_BUILD_PATH=""
 IPA_PATH="${PROJECT_PATH}/${PROJECT_NAME}.ipa"
 DSYM_ZIP="${PROJECT_PATH}/${PROJECT_NAME}.app.dSYM.zip"
-DEVELOPER="iPhone Developer: Jason Cheladyn (X76FE6C3VU)"
-PROVISIONING_PROFILE="${HOME}/Library/MobileDevice/Provisioning Profiles/A401D5F0-7327-4A3D-BCCF-D336E0EB4C0F.mobileprovision"
-API_TOKEN="42b1d039a90f6d66e6607df3c2e021ea_MTA0NTEyNDIwMTMtMDUtMTMgMTY6MDY6MjEuNTQ3NjA5"
-TEAM_TOKEN="39b66a1f73c7144a3ded703c30a9a01e_Mjk1OTAxMjAxMy0xMS0wNyAxNzo0MjowNy4wOTMyMjI"
+DEVELOPER=""
+PROVISIONING_PROFILE=""
+API_TOKEN="abc"
+TEAM_TOKEN="123"
 DATE=$(/bin/date +%"Y-%m-%d")
 APP="${HOME}/Library/Developer/Xcode/Archives/${DATE}/${ARCHIVE}/Products/Applications/${PROJECT_NAME}.app"
 
