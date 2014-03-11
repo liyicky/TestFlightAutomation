@@ -16,7 +16,7 @@ DEVELOPER=""
 API_TOKEN="abc"
 TEAM_TOKEN="123"
 APP="${HOME}/Library/Developer/Xcode/Archives/${DATE}/${ARCHIVE}/Products/Applications/${PROJECT_NAME}.app"
-DISTRIBUTION_LIST="Your_TestFlight_Teams"
+DISTRIBUTION_LISTS="Your_TestFlight_Teams"
 DATE=$(/bin/date +%"Y-%m-%d")
 
 
@@ -45,7 +45,7 @@ $HOME/.rbenv/shims/ipa build --verbose --scheme YOUR_SCHEME
   -F team_token="${TEAM_TOKEN}" \
   -F notify=True                \
   -F notes="${NOTES}"           \
-  -F distribution_list="${DISTRIBUTION_LIST}"
+  -F distribution_lists="${DISTRIBUTION_LISTS}"
 
 git wood --summary HEAD^..HEAD
 /usr/bin/open "https://testflightapp.com/dashboard/builds/"
