@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+cd PATH_TO_REPO
+
 # set -e exits the terminal once a command returns a non 0 exit code. Use this to not push any broken code.
 set -e
 
